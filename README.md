@@ -1,61 +1,88 @@
 # Clojure Koans
 
-The Clojure Koans are a fun and easy way to get started with Clojure - no
-experience assumed or required.  Just follow the instructions below to start
-making tests pass!
+The Clojure Koans are a fun way to get started with Clojure - no experience
+assumed or required. Follow the instructions below to start making tests pass!
 
 
-### Getting Started
+## Getting Started
 
-The easiest and fastest way to get the koans up and running is to [download the
-latest zip file from Github](https://github.com/functional-koans/clojure-koans/downloads).
-This way, you'll have all the dependencies you need, including Clojure itself
-and JLine, and you can skip the rest of this section (skip to "Running the
-Koans").
+I recommend starting from a cloned or forked repo. This way you'll be able to
+track your progress in Git. You might want to create your own branch - that way
+if you pull back the latest koans from master, it'll be a bit easier to manage
+the inevitable conflicts if we make changes to exercises you've already
+completed.
 
-If you're starting from a cloned or forked repo, that's cool too. This way
-you'll be able to track your progress in Git, and see how your answers compare
-to others, by checking out the project's Network tab. You might want to create
-your own branch - that way if you pull back the latest koans from master, it'll
-be a bit easier to manage the inevitable conflicts if we make changes to
-exercises you've already completed.
+You have a few options for installation:
+
+- Install the dependencies for the koans (such as Clojure) on your machine
+- Use Vagrant and the configuration in this repository
+- Use Docker
+
+Instructions for each option are below!
+
+
+### Installation on Your Machine
 
 The only things you'll need to run the Clojure Koans are:
 
-- JRE 1.5 or higher
-- [clojure-1.5.1.jar](http://repo1.maven.org/maven2/org/clojure/clojure/1.5.1/clojure-1.5.1.zip)
+- JDK (I suggest version 8, but anything 6 or above should work fine)
+- [Leiningen](http://github.com/technomancy/leiningen), a build tool for Clojure
 
-You can use [Leiningen](http://github.com/technomancy/leiningen) to
-automatically install the Clojure jar in the right place. Leiningen will also
-get you a couple more jarfiles, including JLine, which allows you some of the
-functionality of readline (command-line history, for example).
+Once you've cloned this repo and installed the dependencies, you can run:
 
-### Installing dependencies
+```
+lein repl
+```
 
-Dependencies are installed automatically with lein 2, but if for some reason
-you're on lein 1 and can't upgrade, you'll need to run
+to make sure all the dependencies get downloaded properly (and then `(exit)`
+when you want to quit). See below for details on the REPL.
 
-`lein deps`
 
-which will download all dependencies you need to run the Clojure koans.
+### Installation with Vagrant
 
-I strongly recommend that you upgrade to lein 2 instead!
+Make sure you have [Vagrant](https://www.vagrantup.com/) and
+[VirtualBox](https://www.virtualbox.org) installed.
+In the root directory of the project, execute:
 
-### Running the Koans
+```
+vagrant up
+vagrant ssh
+cd /vagrant
+lein koan run
+```
 
-If you're running from the zipfile, simply run
 
-`script/run` on Mac/\*nix
+### Installation with Docker
 
-`script\run` on Windows
+Once you've got [Docker](https://www.docker.com/) installed, you're basically
+all set. You can run these commands to get started:
 
-If you're running from a checkout using lein 2, run the koans via
+To run koans:
+
+```
+docker run --rm -it -v $(pwd):/app -w /app clojure lein koan run
+```
+
+To start up a REPL:
+
+```
+docker run --rm -it -v $(pwd):/app -w /app clojure lein repl
+```
+
+
+## Running the Koans
+
+Run the koans via:
 
 `lein koan run`
 
-It's an auto-runner, so as you save your files with the correct answers, it will
-advance you to the next koan or file (conveniently, all files are prefixed with
-the sequence that you should follow).
+If want to run directly from a REPL, once you are inside the `lein repl` prompt you can run the koans with
+
+`(exec "run")`
+
+Either way, it's an auto-runner, so as you save your files with the correct
+answers, it will advance you to the next koan or file (conveniently, all files
+are prefixed with the sequence that you should follow).
 
 You'll see something like this:
 
@@ -66,7 +93,7 @@ You'll see something like this:
     (= __ true)
 
 The output is telling you that you have a failing test in the file named
-`01_equalities.clj`, on line 3. So you just need to open that file up and make
+`01_equalities.clj`, on line 3. So you need to open that file up and make
 it pass!  You'll always be filling in the blanks to make tests pass.
 Sometimes there could be several correct answers (or even an infinite number):
 any of them will work in these cases. Some tests will pass even if you replace
@@ -75,24 +102,24 @@ you give one correct expression to replace each blank.
 
 The koans differ from normal TDD in that the tests are already written for you,
 so you'll have to pay close attention to the failure messages, because up until
-the very end, making a test pass just means that the next failure message comes
+the very end, making a test pass means that the next failure message comes
 up.
 
-While it might be easy (especially at first) to just fill in the blanks making
+While it might be easy (especially at first) to fill in the blanks making
 things pass, you should work thoughtfully, making sure you understand why the
 answer is what it is.  Enjoy your path to Clojure enlightenment!
 
 
-### Trying more things out
+## Trying more things out
 
-There's a REPL (Read-Evaluate-Print Loop) included in the Clojure Koans. Just
-run:
+It's very useful to try things out in a REPL (Read-Evaluate-Print Loop)
+whenever you get stuck or curious. Run:
 
-`script/repl` on Mac/\*nix
+```
+lein repl
+```
 
-`script\repl` on Windows
-
-If you're on lein 2, `lein repl` is what you want instead.
+and you'll be able to type expressions in, and see what output they produce.
 
 Here are some interesting commands you might try, once you're in a running REPL:
 
@@ -111,10 +138,10 @@ And if those still don't make sense:
 
 will show you what those commands mean.
 
-You can exit the REPL with `CTRL-d` on any OS.
+You can exit the REPL with `CTRL-d`, `(exit)`, or `(quit)`.
 
 
-### Contributing
+## Contributing
 
 Patches are encouraged!  Make sure the answer sheet still passes
 (`lein koan test`), and send a pull request.
@@ -125,32 +152,32 @@ to add to existing koans.  So write some fun exercises, add your answers to
 
 Please follow the guidelines in
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html for
-commmit messages, and put your code in a feature branch (not master) before
+commit messages, and put your code in a feature branch (not master) before
 making the pull request. This makes patches easier to review.
 
 Feel free to contact me (Colin Jones / trptcolin) on Github or elsewhere if you
 have any questions or want more direction before you start pitching in.
 
 
-### Contributors
+## Contributors
 
 https://github.com/functional-koans/clojure-koans/contributors
 
 
-### Credits
+## Credits
 
 These exercises were started by [Aaron Bedra](http://github.com/abedra) of
 [Relevance, Inc.](http://github.com/relevance) in early 2010, as a learning
 tool for newcomers to functional programming. Aaron's macro-fu makes these
-koans extremely simple and fun to use, and to improve upon, and without
-Relevance's initiative, this project would not exist.
+koans clear and fun to use and improve upon, and without Relevance's
+initiative, this project would not exist.
 
 Using the [koans](http://en.wikipedia.org/wiki/koan) metaphor as a tool for
 learning a programming language started with the
 [Ruby Koans](http://rubykoans.com) by [EdgeCase](http://github.com/edgecase).
 
 
-### License
+## License
 
 The use and distribution terms for this software are covered by the
 Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)

@@ -1,3 +1,6 @@
+(ns koans.11-lazy-sequences
+  (:require [koan-engine.core :refer :all]))
+
 (meditations
   "There are many ways to generate a sequence"
   (= __ (range 1 5))
@@ -14,12 +17,12 @@
      (drop __ (range 100)))
 
   "Iteration provides an infinite lazy sequence"
-  (= __ (take 20 (iterate inc 0)))
+  (= __ (take 8 (iterate (fn [x] (* x 2)) 1)))
 
   "Repetition is key"
-  (= [:a :a :a :a :a :a :a :a :a :a ]
+  (= [:a :a :a :a :a :a :a :a :a :a]
      (repeat 10 __))
 
   "Iteration can be used for repetition"
-  (= (repeat 100 :foo)
-     (take 100 (iterate ___ :foo))))
+  (= (repeat 100 "hello")
+     (take 100 (iterate ___ "hello"))))

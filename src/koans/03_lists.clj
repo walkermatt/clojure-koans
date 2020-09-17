@@ -1,3 +1,6 @@
+(ns koans.03-lists
+  (:require [koan-engine.core :refer :all]))
+
 (meditations
   "Lists can be expressed by function or a quoted form"
   (= '(__ __ __ __ __) (list 1 2 3 4 5))
@@ -40,4 +43,3 @@
           (rest '())
           (catch IllegalStateException e
             "No dice!"))))
-

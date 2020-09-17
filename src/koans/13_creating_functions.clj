@@ -1,3 +1,6 @@
+(ns koans.13-creating-functions
+  (:require [koan-engine.core :refer :all]))
+
 (defn square [x] (* x x))
 
 (meditations
